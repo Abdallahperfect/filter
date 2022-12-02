@@ -64,6 +64,7 @@
 
         .upload input {
             display: none;
+            
         }
 
         .upload label {
@@ -117,11 +118,22 @@
 
         }
 
+        .range{
+            cursor: pointer;
+
+        }
+
+        
+
         @media screen and (max-width:650px) {
             .container {
                 grid-template-columns: 1fr;
                 gap: 50px;
 
+            }
+
+            .upload{
+                margin-top: 30px;
             }
 
 
@@ -149,37 +161,37 @@
             <ul>
                 <li>
                     <label for="saturate"> Saturate</label>
-                    <input type="range" id="saturate" min="0" max="200" value="100" />
+                    <input type="range" id="saturate" min="0" max="200" value="100"  class="range"/>
                 </li>
                 <li>
 
                     <label for="contrast"> Contrast</label>
-                    <input type="range" id="contrast" min="0" max="200" value="100" />
+                    <input type="range" id="contrast" min="0" max="200" value="100" class="range"/>
                 </li>
                 <li>
 
                     <label for="brightness"> Brightness</label>
-                    <input type="range" id="brightness" min="0" max="200" value="100" />
+                    <input type="range" id="brightness" min="0" max="200" value="100" class="range"/>
                 </li>
                 <li>
 
                     <label for="sepia"> Sepia</label>
-                    <input type="range" id="sepia" min="0" max="200" value="0" />
+                    <input type="range" id="sepia" min="0" max="200" value="0" class="range"/>
                 </li>
                 <li>
 
                     <label for="grayscale"> Gray Scale</label>
-                    <input type="range" id="grayscale" step="0.1" min="0" max="1" value="0" />
+                    <input type="range" id="grayscale" step="0.1" min="0" max="1" value="0" class="range"/>
                 </li>
                 <li>
 
                     <label for="blurs"> Blur</label>
-                    <input type="range" id="blurs" step="0.1" min="0" max="10" value="0" />
+                    <input type="range" id="blurs" step="0.1" min="0" max="10" value="0" class="range"/>
                 </li>
                 <li>
 
                     <label for="huerotate"> Hue Rotate</label>
-                    <input type="range" id="huerotate" min="0" max="350" value="0" />
+                    <input type="range" id="huerotate" min="0" max="350" value="0" class="range"/>
                 </li>
 
                 <li>
@@ -216,14 +228,23 @@
 
 
         function resetvalue() {
-            img.style.filter = "none";
-            saturate.value = "100";
+         saturate.value = "100";
             contrast.value = "100";
             brightness.value = "100";
             sepia.value = "0";
             grayscale.value = "0";
             blurs.value = "0";
             huerotate.value = "0";
+            ctx.filter =
+                `hue-rotate(${huerotate.value}deg)
+                saturate(${saturate.value}%)
+               contrast(${contrast.value}%)
+               brightness(${brightness.value}%)
+               sepia(${sepia.value}%)
+               grayscale(${grayscale.value})
+               blur(${blurs.value}px)`;  
+               ctx.drawImage(img,0,0,canvas.width,canvas.height);
+ 
 
         }
 
